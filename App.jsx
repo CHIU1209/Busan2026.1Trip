@@ -14,23 +14,35 @@ import {
   Sparkles,
   Train,
   Ship,
-  Anchor
+  Anchor,
+  ExternalLink // 新增這個圖示
 } from 'lucide-react';
 
-// --- Data: 根據圖片更新的詳細行程資料 ---
+// --- Data: 行程資料 ---
 const tripData = [
   {
     day: 1,
     date: "1/1 (四)",
     title: "出發！抵達釜山",
     location: "桃園 ➝ 金海機場 ➝ 廣安里",
-    tags: ["#新春出發", "#廣安里住宿", "#83烤腸"],
+    tags: ["#新春出發", "#廣安里住宿", "#烤肉三選一"],
     energy: 3, 
     events: [
       { time: "13:30", icon: <Plane size={18} />, title: "桃園機場集合", desc: "第一航廈櫃台報到" },
       { time: "15:40", icon: <Plane size={18} />, title: "飛機起飛", desc: "前往釜山 (預計 18:50 抵達)" },
       { time: "20:30", icon: <Train size={18} />, title: "前往廣安里", desc: "入境手續完成後，前往住宿地點" },
-      { time: "22:00", icon: <Utensils size={18} />, title: "晚餐：83烤腸", desc: "第一餐就是道地韓式烤腸！" }
+      { 
+        time: "22:00", 
+        icon: <Utensils size={18} />, 
+        title: "晚餐：廣安里烤肉 (三選一)", 
+        desc: "抵達第一餐！精選三家高評價烤肉，看現場排隊狀況決定：",
+        // 新增 links 欄位
+        links: [
+          { label: "83獬豸 (83 Haechi)", url: "https://naver.me/F9N4V8To" },
+          { label: "釜山宅 (Busanjib)", url: "https://naver.me/FqWtLovu" },
+          { label: "釜山食 (Busansik)", url: "https://naver.me/x4GUU2NG" }
+        ]
+      }
     ]
   },
   {
@@ -39,7 +51,7 @@ const tripData = [
     title: "海雲台與遊艇體驗",
     location: "海雲台 ➝ 斜坡滑車 ➝ Spa Land",
     tags: ["#膠囊列車", "#斜坡滑車", "#遊艇夕陽", "#SpaLand"],
-    energy: 5, // 行程很滿
+    energy: 5, 
     events: [
       { time: "09:30", icon: <Utensils size={18} />, title: "早餐：大海鮑魚粥", desc: "海雲台著名的暖胃早餐" },
       { time: "10:30", icon: <Train size={18} />, title: "膠囊列車 & 天空步道", desc: "尾浦 ➝ 青沙浦，接著走青沙浦天空步道" },
@@ -101,8 +113,8 @@ const tripData = [
 
 const tipsData = [
   { title: "天氣 ❄️", content: "1月釜山很冷 (0°C - 8°C)，尤其海邊風大。請務必準備帽子、圍巾和好穿脫的保暖大衣。" },
-  { title: "交通 🚇", content: "行程中有多次計程車移動 (如松島、影島)，建議準備好韓文地址或 Naver Map 給司機看。" },
-  { title: "訂位 📝", content: "部分熱門餐廳 (如味贊王、伍班長) 可能無法預訂，建議避開尖峰時間或現場候位。" },
+  { title: "地圖 🗺️", content: "點擊行程中有藍色框框的餐廳名稱，可以直接打開 Naver Map 導航喔！" },
+  { title: "交通 🚇", content: "行程中有多次計程車移動 (如松島、影島)，建議準備好韓文地址給司機看。" },
   { title: "電源 🔌", content: "韓國電壓220V (兩孔圓形)。Spa Land 內有充電孔，但建議隨身攜帶行動電源。" },
 ];
 
@@ -179,6 +191,25 @@ const DayCard = ({ data }) => (
               <span className="text-xs font-mono text-gray-400 bg-white px-1.5 py-0.5 rounded border border-gray-100">{event.time}</span>
             </div>
             <p className="text-sm text-gray-600 leading-relaxed">{event.desc}</p>
+            
+            {/* 新增：如果 event 有 links，就顯示連結按鈕 */}
+            {event.links && (
+              <div className="mt-3 flex flex-wrap gap-2">
+                {event.links.map((link, i) => (
+                  <a 
+                    key={i}
+                    href={link.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-1 px-3 py-1.5 bg-white border border-blue-200 text-blue-600 rounded-lg text-xs font-medium hover:bg-blue-50 transition-colors shadow-sm"
+                  >
+                    <ExternalLink size={12} />
+                    {link.label}
+                  </a>
+                ))}
+              </div>
+            )}
+            
           </div>
         </div>
       ))}
@@ -213,7 +244,6 @@ export default function App() {
   const [activeTab, setActiveTab] = useState(1);
   const [view, setView] = useState('itinerary'); // 'itinerary' or 'info'
 
-  // Scroll to top when tab changes
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }, [activeTab, view]);
@@ -238,7 +268,7 @@ export default function App() {
         </div>
       </header>
 
-      {/* Date Tabs (Horizontal Scroll) */}
+      {/* Date Tabs */}
       {view === 'itinerary' && (
         <div className="sticky top-[73px] z-40 bg-gray-50/95 backdrop-blur border-b border-gray-200">
           <div className="flex overflow-x-auto px-4 py-3 gap-3 no-scrollbar max-w-md mx-auto snap-x">
