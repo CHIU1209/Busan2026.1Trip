@@ -29,7 +29,7 @@ const tripData = [
     energy: 3, 
     events: [
       { time: "13:30", icon: <Plane size={18} />, title: "桃園機場集合", desc: "第一航廈櫃台報到" },
-      { time: "15:40", icon: <Plane size={18} />, title: "飛機起飛", desc: "前往釜山 (預計 18:50 抵達)" },
+      { time: "15:40", icon: <Plane size={18} />, title: "飛機起飛 (CI186)", desc: "華航 CI186 | 桃園(TPE) 15:40 ➝ 釜山(PUS) 18:50" },
       { time: "20:30", icon: <Train size={18} />, title: "前往廣安里", desc: "入境手續完成後，前往住宿地點" },
       { 
         time: "22:00", 
@@ -91,7 +91,15 @@ const tripData = [
       { time: "13:30", icon: <Utensils size={18} />, title: "午餐：Shake Shack", desc: "享受人氣漢堡" },
       { time: "15:00", icon: <ShoppingBag size={18} />, title: "西面商圈", desc: "釜山最熱鬧的逛街聖地" },
       { time: "18:00", icon: <Camera size={18} />, title: "Millac the Market", desc: "廣安里複合文化空間，看夜景逛市集" },
-      { time: "20:00", icon: <Utensils size={18} />, title: "晚餐：廣安里", desc: "廣安里周邊烤貝或美食" }
+      { 
+        time: "20:00", 
+        icon: <Utensils size={18} />, 
+        title: "晚餐：廣安里烤貝", 
+        desc: "廣安里海邊享受新鮮烤貝，欣賞大橋夜景",
+        links: [
+          { label: "廣安里烤貝名店", url: "https://naver.me/xYvZG2aP" }
+        ]
+      }
     ]
   },
   {
@@ -99,14 +107,23 @@ const tripData = [
     date: "1/5 (一)",
     title: "最後採買與返程",
     location: "西面 ➝ 田浦 ➝ 機場",
-    tags: ["#松亭3代豬肉湯飯", "#田浦咖啡街", "#樂天百貨"],
+    tags: ["#釜山韓牛", "#田浦咖啡街", "#樂天百貨"],
     energy: 2,
     events: [
-      { time: "10:30", icon: <ShoppingBag size={18} />, title: "前往西面站", desc: "退房後，前往西面站寄放行李" },
-      { time: "11:00", icon: <Utensils size={18} />, title: "午餐：松亭3代豬肉湯飯", desc: "西面湯飯一條街的老字號美味" },
-      { time: "12:30", icon: <ShoppingBag size={18} />, title: "樂天百貨 & 西面最後衝刺", desc: "補齊伴手禮" },
+      { time: "10:30", icon: <ShoppingBag size={18} />, title: "前往西面站", desc: "退房後，前往西面站寄放行李，先去逛逛" },
+      { 
+        time: "12:00", 
+        icon: <Utensils size={18} />, 
+        title: "午餐：釜山韓牛 (二選一)", 
+        desc: "來韓國怎能不吃韓牛！請注意營業時間，推薦去田浦洞那家比較不用等太久",
+        links: [
+          { label: "田浦洞韓牛 (12:00開)", url: "https://naver.me/513N60s6" },
+          { label: "西面韓牛 (15:00開)", url: "https://naver.me/xnh0dpkx" }
+        ]
+      },
+      { time: "13:30", icon: <ShoppingBag size={18} />, title: "樂天百貨 & 西面最後衝刺", desc: "補齊伴手禮" },
       { time: "15:00", icon: <Coffee size={18} />, title: "田浦咖啡街", desc: "找間漂亮的咖啡廳享受最後時光" },
-      { time: "17:30", icon: <Plane size={18} />, title: "前往金海機場", desc: "19:50 飛機起飛，預計 21:30 抵達桃園" }
+      { time: "17:30", icon: <Plane size={18} />, title: "前往金海機場", desc: "華航 CI187 | 釜山(PUS) 18:50 ➝ 桃園(TPE) 21:30" }
     ]
   }
 ];
